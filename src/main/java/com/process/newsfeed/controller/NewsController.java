@@ -1,5 +1,6 @@
 package com.process.newsfeed.controller;
 
+import com.process.newsfeed.entity.category.Category;
 import com.process.newsfeed.entity.news.News;
 import com.process.newsfeed.repository.NewsRepository;
 import com.process.newsfeed.service.CategoryService;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class NewsController {
@@ -43,15 +45,15 @@ public class NewsController {
         return "redirect:/findAllNews";
     }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String addNews(@ModelAttribute("updateNews") News news){
-        newsService.save(news);
+    public String addNews(@ModelAttribute("updateNews") News news,@RequestParam("selected") long id){
+        newsService.save(news,id);
         return "redirect:/findAllNews";
     }
 
     @RequestMapping(value = "/findByName")
     public String findByName(@RequestParam("news") String news,Model model){
-        News news1 = newsService.findByName(news);
-        model.addAttribute("newsOfList",news1);
+        model.addAttribute("news",newsService.findByName(news));
+        model.addAttribute("bool",true);
         return "findNews";
     }
 
@@ -61,8 +63,9 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/findByContent",method = RequestMethod.POST)
-    public String findByContent(@ModelAttribute("findContent") News news, Model model){
-        model.addAttribute("findContent",newsService.findByContent(news.getContent()));
+    public String findByContent(@RequestParam("news") String news, Model model){
+        model.addAttribute("findContent",newsService.findByContent(news));
+        model.addAttribute("bool",true);
         return "find";
     }
 
@@ -70,5 +73,10 @@ public class NewsController {
     public String deleteNews(@RequestParam("deleteNews") int id){
         newsService.deleteNews(id);
         return "redirect:/findAllNews";
+    }
+    @RequestMapping(value = "/saveCategory",method = RequestMethod.POST)
+    public String saveCategory(@ModelAttribute("form")Category category,@RequestParam("selected") long id){
+        categoryService.saveCategory(category,id);
+        return "redirect:/addNews";
     }
 }

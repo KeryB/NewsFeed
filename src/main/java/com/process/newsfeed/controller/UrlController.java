@@ -51,4 +51,14 @@ public class UrlController {
         model.addAttribute("categories",categoryService.findAllCategories());
         return "add";
     }
+    @RequestMapping(value = "/findContent")
+    public String find(Model model){
+        model.addAttribute("bool",false);
+        return "find";
+    }
+    @RequestMapping(value = "/addCategory")
+    public String addCategory(Model model){
+        model.addAttribute("newsList",newsService.findAllNews());
+        return "category";
+    }
 }

@@ -1,6 +1,8 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <style>
         .user_card {
             box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.33);
@@ -11,34 +13,39 @@
 
         .move {
             padding-left: 100px;
-            margin-top: -33px;
         }
     </style>
 </head>
 <body>
 
-<#if newsOfList?size ==0>
-<div class="alert alert-warning">
-    <strong>Внимание!</strong> Никаких новостей нет.
-</div>
-<form action="/cancel">
-    <input type="submit" value="Назад" class="btn btn-primary"/>
+<form action="/findByName" class="col-md-4" style="padding-top: 30px">
+    <div class="form-group ">
+        <input type="text" class="form-control" name="news" placeholder="Введите новость">
+    </div>
+    <input type="submit" class="btn btn-primary" value="Найти">
 </form>
-<#else >
-    <#list newsOfList as news>
-    <div>
+<#if bool>
+    <#if news??>
+    <div class="col-lg-12">
         <div class="user_card col-md-3">
             <h4 class="card-header">${news.name}</h4>
             <div class="card-block">
                 <p class="card-text">${news.content}.</p>
             </div>
             <div class="col-md-5">
-                <div>
+                <div class="move">
                 ${news.date_publication}
                 </div>
             </div>
         </div>
     </div>
-    </#list>
+    <#else >
+    <div>
+        <div class="alert alert-warning">
+            <strong>Внимание!</strong> По такому запросу ничего не найдено
+        </div>
+    </div>
+    </#if>
+<#else >
 </#if>
 </body>

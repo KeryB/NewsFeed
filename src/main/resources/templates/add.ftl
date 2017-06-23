@@ -12,6 +12,7 @@
 
         .move {
             padding-left: 200px;
+            padding-top: 350px;
         }
     </style>
 </head>
@@ -32,11 +33,9 @@
                               rows="3" placeholder="Введите контент"></textarea>
                 </div>
             <#if categories?size ==0>
-                <div class="has-error">
-                    <label for="Categories">Категория</label>
-                    <select name="selected" id="Categories" form="form">
-                        <option name="categoriesId" disabled>В базе нет ни одной категории</option>
-                </div>
+                <label for="Categories">Категория</label>
+            <select name="selected" id="Categories" form="form">
+                <option>В базе нет ни одной категории:</option>
             <#else >
                 <label for="Categories">Категория</label>
             <select name="selected" id="Categories" form="form">
@@ -46,6 +45,9 @@
                 </#list>
             </#if>
                 <input type="submit" class="btn btn-primary" value="Добавить новость">
+            </form>
+            <form action="/addCategory">
+                <input type="submit" class="btn btn-primary" value="Добавить категорию">
             </form>
         </div>
         <form action="/toNews">

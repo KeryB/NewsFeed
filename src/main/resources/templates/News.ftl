@@ -27,7 +27,7 @@
 </form>
 <#else >
     <#list allNews as news>
-    <div>
+    <div class="form-group" style="margin-left: 100px">
         <div class="user_card col-md-3">
             <h4 class="card-header">${news.name}</h4>
             <div class="card-block">
@@ -48,6 +48,7 @@
             </div>
         </div>
     </div>
+
     </#list>
 </#if>
 </body>
