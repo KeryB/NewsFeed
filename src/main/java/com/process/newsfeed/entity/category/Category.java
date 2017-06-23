@@ -24,7 +24,6 @@ public class Category {
 
     @ManyToOne
     @JoinColumn(name = JpaUtils.NEWS_PRIMARY_KEY)
-    @JsonBackReference
     private News primaryNews;
 
 }

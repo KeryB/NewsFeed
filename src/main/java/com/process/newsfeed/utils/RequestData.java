@@ -12,5 +12,5 @@ public class RequestData {
     private String name;
     private String content;
     private Date publication_date;
-    private String title;
+    private Long category_id;
 }

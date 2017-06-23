@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class NewsService {
 
     private final NewsRepository newsRepository;
@@ -27,15 +30,16 @@ public class NewsService {
         List<News> newsList = newsRepository.findAll();
         return newsList;
     }
-    public void createAndUpdateNews(RequestData data){
-        News news = new News();
-        if(data.getId()!=null){
-            news.setNews_id(data.getId());
-        }
-        news.setDate_publication(data.getPublication_date());
-        news.setName(data.getName());
-        news.setContent(data.getContent());
-        newsRepository.save(news);
+    public void update(News data){
+        data.setDate_publication(new Date());
+        newsRepository.save(data);
+    }
+    public void save(News data){
+/*       Category categoryList=categoryRepository.findOne(id);
+        categoryList.setPrimaryNews(data);
+        categoryRepository.save(categoryList);*/
+        data.setDate_publication(new Date());
+        newsRepository.save(data);
     }
     public void deleteNews(long id){
         newsRepository.delete(id);
@@ -49,6 +53,10 @@ public class NewsService {
     }
     public News findByContent(String content){
         return newsRepository.findByContent(content);
+    }
+
+    public News findById(long id){
+        return newsRepository.findOne(id);
     }
 
 }
