@@ -45,8 +45,8 @@ public class NewsController {
         return "redirect:/findAllNews";
     }
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String addNews(@ModelAttribute("updateNews") News news,@RequestParam("selected") long id){
-        newsService.save(news,id);
+    public String addNews(@ModelAttribute("updateNews") News news){
+        newsService.save(news);
         return "redirect:/findAllNews";
     }
 

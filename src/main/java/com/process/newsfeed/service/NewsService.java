@@ -34,10 +34,7 @@ public class NewsService {
         data.setDate_publication(new Date());
         newsRepository.save(data);
     }
-    public void save(News data,long id){
-       Category categoryList=categoryRepository.findOne(id);
-        categoryList.setPrimaryNews(data);
-        categoryRepository.save(categoryList);
+    public void save(News data){
         data.setDate_publication(new Date());
         newsRepository.save(data);
     }

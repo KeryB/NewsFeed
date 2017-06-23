@@ -32,18 +32,6 @@
                     <textarea class="form-control" name="content" id="exampleTextarea"
                               rows="3" placeholder="Введите контент"></textarea>
                 </div>
-            <#if categories?size ==0>
-                <label for="Categories">Категория</label>
-            <select name="selected" id="Categories" form="form">
-                <option>В базе нет ни одной категории:</option>
-            <#else >
-                <label for="Categories">Категория</label>
-            <select name="selected" id="Categories" form="form">
-                <option>Выберете к какой категории относиться данная новость:</option>
-                <#list categories as category>
-                    <option name="category_id" value="${category.category_id}"> ${category.title}</option>
-                </#list>
-            </#if>
                 <input type="submit" class="btn btn-primary" value="Добавить новость">
             </form>
             <form action="/addCategory">
